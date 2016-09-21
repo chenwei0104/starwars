@@ -30,7 +30,7 @@ function startAppServer(callback) {
   });
   appServer = new WebpackDevServer(compiler, {
     contentBase: '/public/',
-    proxy: {'/graphql': `http://localhost:${GRAPHQL_PORT}`},
+    proxy: {'/graphql': 'http://graphql-swapi.parseapp.com'},
     publicPath: '/js/',
     stats: {colors: true}
   });
@@ -43,7 +43,7 @@ function startAppServer(callback) {
     }
   });
 }
-
+/*
 function startGraphQLServer(callback) {
   // Expose a GraphQL endpoint
   clean('./data/schema');
@@ -63,6 +63,7 @@ function startGraphQLServer(callback) {
     }
   });
 }
+*/
 
 function startServers(callback) {
   // Shut down the servers
@@ -72,7 +73,15 @@ function startServers(callback) {
   if (graphQLServer) {
     graphQLServer.close();
   }
-
+  let doneTasks = 0;
+  function handleTaskDone() {
+    doneTasks++;
+    if (doneTasks === 2 && callback) {
+      callback();
+    }
+  }
+  startAppServer(handleTaskDone);
+  /*
   // Compile the schema
   exec('npm run update-schema', (error, stdout) => {
     console.log(stdout);
@@ -86,7 +95,9 @@ function startServers(callback) {
     startGraphQLServer(handleTaskDone);
     startAppServer(handleTaskDone);
   });
+  */
 }
+/*
 const watcher = chokidar.watch('./data/{database,schema}.js');
 watcher.on('change', path => {
   console.log(`\`${path}\` changed. Restarting.`);
@@ -94,4 +105,5 @@ watcher.on('change', path => {
     console.log('Restart your browser to use the updated schema.')
   );
 });
+*/
 startServers();
