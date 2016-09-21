@@ -20,7 +20,10 @@ export default Relay.createContainer(App, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on PeopleConnection {
-        people 
+        people {
+          id
+          name
+        }
       }
     `,
   },

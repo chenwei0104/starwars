@@ -31,7 +31,11 @@ function startAppServer(callback) {
   });
   appServer = new WebpackDevServer(compiler, {
     contentBase: '/public/',
-    proxy: {'/graphql': 'http://graphql-swapi.parseapp.com'},
+    proxy: {
+      '/graphql': {
+        target: `http://graphql-swapi.parseapp.com`,
+      }
+    },
     publicPath: '/js/',
     stats: {colors: true}
   });
@@ -82,7 +86,6 @@ function startServers(callback) {
     }
   }
 
-  getSchema();
   startAppServer(handleTaskDone);
   /*
   // Compile the schema

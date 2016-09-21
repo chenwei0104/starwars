@@ -4,7 +4,6 @@ const {
   buildClientSchema,
   printSchema,
 } = require('graphql/utilities');
-const introspectionQuery = require('./introspectionQuery.js');
 const path = require('path');
 const schemaPath = path.join(__dirname, 'schema');
 
