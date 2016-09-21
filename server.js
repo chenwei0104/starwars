@@ -6,6 +6,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import {clean} from 'require-clean';
 import {exec} from 'child_process';
+import {getSchema} from './data/schema';
 
 const APP_PORT = 3000;
 const GRAPHQL_PORT = 8080;
@@ -80,6 +81,8 @@ function startServers(callback) {
       callback();
     }
   }
+
+  getSchema();
   startAppServer(handleTaskDone);
   /*
   // Compile the schema
@@ -93,17 +96,10 @@ function startServers(callback) {
       }
     }
     startGraphQLServer(handleTaskDone);
+    getSchema();
     startAppServer(handleTaskDone);
   });
+
   */
 }
-/*
-const watcher = chokidar.watch('./data/{database,schema}.js');
-watcher.on('change', path => {
-  console.log(`\`${path}\` changed. Restarting.`);
-  startServers(() =>
-    console.log('Restart your browser to use the updated schema.')
-  );
-});
-*/
 startServers();
