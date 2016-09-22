@@ -18,7 +18,6 @@ class App extends React.Component {
             <h2>Star Wars</h2>
           </div>
           <CharacterBoard allPeople={this.props.allPeople} />
-          <MessageBoard />
         </div>
       </MuiThemeProvider> 
     );
