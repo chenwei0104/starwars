@@ -24,6 +24,18 @@ function startAppServer(callback) {
           exclude: /node_modules/,
           loader: 'babel',
           test: /\.js$/,
+        }, {
+          test: /\.css$/,
+          loader: "style-loader!css-loader",
+          exclude: /node_modules/,
+        }, {
+          test: /\.png$/,
+          loader: "url-loader?limit=100000",
+          exclude: /node_modules/,
+        }, {
+          test: /\.jpg$/,
+          loader: "file-loader",
+          exclude: /node_modules/,
         }
       ]
     },
@@ -34,6 +46,8 @@ function startAppServer(callback) {
     proxy: {
       '/graphql': {
         target: `http://graphql-swapi.parseapp.com`,
+        changeOrigin: true,
+        pathRewrite: {'^/graphql' : '?'}
       }
     },
     publicPath: '/js/',

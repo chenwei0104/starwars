@@ -1,0 +1,19 @@
+.container {
+  min-height: 200px;
+  padding: 10px;
+}
+
+.left {
+  width: 30%;
+  display: inline-block;
+}
+
+.middle {
+  width: 40%;
+  display: inline-block;
+}
+
+.right {
+  width: 30%;
+  display: inline-block;
+}
